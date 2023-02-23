@@ -641,6 +641,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentState: 
   moveInput: {x: 0, y: 0}
+  downButtonHold: 0
+  jumpMultiplyer: 0
+  maxJumpMultiplayer: 500
+  jumpMultiplayerSpeed: 1
 --- !u!114 &210991094
 MonoBehaviour:
   m_ObjectHideFlags: 0

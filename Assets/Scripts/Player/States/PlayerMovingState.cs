@@ -12,22 +12,40 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void ExitState(Player player)
     {
-        
+        player.jumpMultiplyer = 0;
     }
 
     public override void Update(Player player)
     {
         if (player.controls.Gameplay.Jump.triggered)
-            playerMovement.Jump();
+        {
+            playerMovement.Jump(player.jumpMultiplyer);
+            return;
+        }
+
+        if (player.downButtonHold && player.jumpMultiplyer < player.maxJumpMultiplayer)
+        {
+            player.jumpMultiplyer += player.jumpMultiplayerSpeed * Time.fixedDeltaTime;
+        }
+            
 
     }
 
     public override void FixedUpdate(Player player)
     {
         if (!playerMovement.IsGrounded())
+        {
             player.TransitionToState(player.playerAirBoneState);
+            return;
+        }
 
-        playerMovement.Move(player.moveInput);
+
+        if (!player.downButtonHold)
+        {
+            playerMovement.Move(player.moveInput);
+            return;
+        }
+            
     }
 
     public override void OnCollisionEnter2D(Player player, Collision2D colision)

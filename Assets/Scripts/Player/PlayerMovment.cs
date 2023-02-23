@@ -71,6 +71,12 @@ public class PlayerMovment : MonoBehaviour
         rigidBody.AddForce(jumpVector);
     }
 
+    public void Jump(float multiplayer)
+    {
+        Vector2 jumpVector = new Vector2(0, jumpForce + multiplayer);
+        rigidBody.AddForce(jumpVector);
+    }
+
     public bool IsGrounded()
     {
         return groundCheck.check;

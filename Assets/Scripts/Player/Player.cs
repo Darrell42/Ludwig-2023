@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     //Variable to store the inputs used to move
     public Controls controls;
     public Vector2 moveInput;
+    public bool downButtonHold;
+    
+    //Stuff for the carged jump to work 
+    public float jumpMultiplyer = 0f;
+    public float maxJumpMultiplayer = 500f;
+    public float jumpMultiplayerSpeed = 1f;
 
     //This manage the transitions between States
     public void TransitionToState(PlayerBaseState nextState)
@@ -48,6 +54,9 @@ public class Player : MonoBehaviour
         controls = new Controls();
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
+
+        controls.Gameplay.CargeJump.started += ctx => downButtonHold = true;
+        controls.Gameplay.CargeJump.canceled += ctx => { downButtonHold = false; jumpMultiplyer = 0; };
     }
 
     private void OnEnable()
