@@ -25,7 +25,7 @@ public class PlayerMovingState : PlayerBaseState
 
         if (player.downButtonHold && player.jumpMultiplyer < player.maxJumpMultiplayer)
         {
-            player.jumpMultiplyer += player.jumpMultiplayerSpeed * Time.fixedDeltaTime;
+            player.jumpMultiplyer += player.jumpMultiplayerSpeed * Time.deltaTime;
         }
             
 
